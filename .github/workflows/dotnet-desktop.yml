@@ -42,12 +42,12 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Windows-x64
-        path: .\PKHeX.RentalViewer\PKHeX.RentalViewer\bin\Release\net7.0-windows\publish
+        path: .\PKHeX.RentalViewer\bin\Release\net7.0-windows\publish
 
     # Compress application
     - name: Compress Windows Forms
       if: github.event_name != 'pull_request'
-      run: Compress-Archive .\PKHeX.RentalViewer\PKHeX.RentalViewer\bin\Release\net7.0-windows\publish\PKHeX.RentalViewer.dll PKHeX.RentalViewer.zip
+      run: Compress-Archive .\PKHeX.RentalViewer\bin\Release\net7.0-windows\publish\PKHeX.RentalViewer.dll PKHeX.RentalViewer.zip
 
     # Create pre-release
     - name: Pre-Release 
