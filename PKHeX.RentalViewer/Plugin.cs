@@ -38,6 +38,7 @@ public class Plugin : IPlugin
         // Always place in box 0 and start a slot 0
         const int box = 0;
         var slot = 0;
+
         // Maximum of 5 rental teams
         for (var i = 0; i < 5; i++)
         {
