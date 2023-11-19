@@ -6,7 +6,7 @@ using Core;
 public class Plugin : IPlugin
 {
     private const uint KRentalTeams = 0x19CB0339;
-    private const int Length = 0x840;
+    private const int Length = 0x844;
 
     public ISaveFileProvider SaveFileEditor { get; private set; } = null!;
     public IPKMView PkmEditor { get; private set; } = null!;
@@ -35,6 +35,9 @@ public class Plugin : IPlugin
         if (MessageBox.Show("Do you want to extract rental teams? They'll be placed in B0S0.", "Rental viewer", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
             return;
 
+        // Always place in box 0 and start a slot 0
+        const int box = 0;
+        var slot = 0;
         // Maximum of 5 rental teams
         for (var i = 0; i < 5; i++)
         {
@@ -45,11 +48,8 @@ public class Plugin : IPlugin
                 .Skip(0x30)
                 .ToList();
 
-            var slot = 0;
-
-            // Always place in box 0 and start a slot 0
             foreach (var pkm in ExtractTeam(team))
-                sav.SetBoxSlotAtIndex(pkm, 0, slot++);
+                sav.SetBoxSlotAtIndex(pkm, box, slot++);
         }
 
         SaveFileEditor.ReloadSlots();
